@@ -18,29 +18,53 @@ class Card extends React.Component {
     }
 }
 
-const data = {
-    "avatar_url": "https://avatars1.githubusercontent.com/u/53142237?v=4",
-    "name": "Ahmed",
-    "company": "AAHM",
-}
+const data = [
+    {
+        "avatar_url": "https://avatars1.githubusercontent.com/u/53142237?v=4",
+        "name": "Ahmed",
+        "company": "AAHM",
+    },
+    {
+        "avatar_url": "https://avatars1.githubusercontent.com/u/53142237?v=4",
+        "name": "Ahmed",
+        "company": "AAHM",
+    },
+]
 
 const CardList = (props) => (
     <div>
-        <Card {...data}/>
+        {props.profiles.map(profile => <Card {...profile} />)}
     </div>
 )
 
 
-class App extends React.Component {
-  render() {
-    return (
-        <div>
-          <div className="header">{this.props.title}</div>
-          <CardList />
-        </div>
-    )
+class Form extends React.Component {
+    render() {
+        return (
+            <form action="">
+                <input type="text" placeholder="Github username"/>
+                <button>Add Card</button>
+            </form>
+        )
+    }
+}
 
-  }
+
+class App extends React.Component {
+    state = {
+        profiles: data,
+    }
+
+    render() {
+        return (
+            <div>
+              <div className="header">{this.props.title}</div>
+              <Form />
+              <CardList profiles={this.state.profiles}/>
+            </div>
+        )
+
+    }
 }
 
 
