@@ -3,18 +3,32 @@ import logo from './logo.svg';
 import './App.css';
 
 class Card extends React.Component {
-  render() {
-    return (
-        <div className="github-profile">
-            <img src="https://placehold.it/75" />
-            <div className="info">
-                <div className="name">name</div>
-                <div className="company">company</div>
+
+    render() {
+       const profile = this.props
+       return (
+            <div className="github-profile">
+                <img src={profile.avatar_url} />
+                <div className="info">
+                    <div className="name">{profile.name}</div>
+                    <div className="company">{profile.company}</div>
+                </div>
             </div>
-        </div>
-    )
-  }
+       )
+    }
 }
+
+const data = {
+    "avatar_url": "https://avatars1.githubusercontent.com/u/53142237?v=4",
+    "name": "Ahmed",
+    "company": "AAHM",
+}
+
+const CardList = (props) => (
+    <div>
+        <Card {...data}/>
+    </div>
+)
 
 
 class App extends React.Component {
@@ -22,7 +36,7 @@ class App extends React.Component {
     return (
         <div>
           <div className="header">{this.props.title}</div>
-          <Card />
+          <CardList />
         </div>
     )
 
@@ -31,3 +45,38 @@ class App extends React.Component {
 
 
 export default App;
+
+//
+// {
+//     "login": "ahmedEid1",
+//     "id": 53142237,
+//     "node_id": "MDQ6VXNlcjUzMTQyMjM3",
+//
+//     "gravatar_id": "",
+//     "url": "https://api.github.com/users/ahmedEid1",
+//     "html_url": "https://github.com/ahmedEid1",
+//     "followers_url": "https://api.github.com/users/ahmedEid1/followers",
+//     "following_url": "https://api.github.com/users/ahmedEid1/following{/other_user}",
+//     "gists_url": "https://api.github.com/users/ahmedEid1/gists{/gist_id}",
+//     "starred_url": "https://api.github.com/users/ahmedEid1/starred{/owner}{/repo}",
+//     "subscriptions_url": "https://api.github.com/users/ahmedEid1/subscriptions",
+//     "organizations_url": "https://api.github.com/users/ahmedEid1/orgs",
+//     "repos_url": "https://api.github.com/users/ahmedEid1/repos",
+//     "events_url": "https://api.github.com/users/ahmedEid1/events{/privacy}",
+//     "received_events_url": "https://api.github.com/users/ahmedEid1/received_events",
+//     "type": "User",
+//     "site_admin": false,
+//
+//     "blog": "",
+//     "location": null,
+//     "email": null,
+//     "hireable": null,
+//     "bio": null,
+//     "twitter_username": null,
+//     "public_repos": 24,
+//     "public_gists": 0,
+//     "followers": 0,
+//     "following": 1,
+//     "created_at": "2019-07-21T11:12:35Z",
+//     "updated_at": "2020-09-28T17:01:04Z"
+// }
