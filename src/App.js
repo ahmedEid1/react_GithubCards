@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+
 
 class Card extends React.Component {
 
@@ -18,19 +20,6 @@ class Card extends React.Component {
     }
 }
 
-const data = [
-    {
-        "avatar_url": "https://avatars1.githubusercontent.com/u/53142237?v=4",
-        "name": "Ahmed",
-        "company": "AAHM",
-    },
-    {
-        "avatar_url": "https://avatars1.githubusercontent.com/u/53142237?v=4",
-        "name": "Ahmed",
-        "company": "AAHM",
-    },
-]
-
 
 const CardList = (props) => (
     <div>
@@ -44,11 +33,11 @@ class Form extends React.Component {
         username: ''
     };
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(
-            this.state.username
-        )
+        const response = await axios.get(`https://api.github.com/users/${this.state.username}`)
+        this.props.onSubmit(response.data)
+        this.setState({username: ''})
     }
 
     render() {
@@ -67,14 +56,18 @@ class Form extends React.Component {
 
 class App extends React.Component {
     state = {
-        profiles: data,
+        profiles: [],
     }
-
+    addNewProfile = (profile) => {
+        this.setState(prevState => ({
+            profiles: [...this.state.profiles, profile],
+        }))
+    }
     render() {
         return (
             <div>
               <div className="header">{this.props.title}</div>
-              <Form />
+              <Form onSubmit={this.addNewProfile}/>
               <CardList profiles={this.state.profiles}/>
             </div>
         )
