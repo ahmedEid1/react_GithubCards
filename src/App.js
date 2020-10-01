@@ -31,6 +31,7 @@ const data = [
     },
 ]
 
+
 const CardList = (props) => (
     <div>
         {props.profiles.map(profile => <Card {...profile} />)}
@@ -39,10 +40,24 @@ const CardList = (props) => (
 
 
 class Form extends React.Component {
+    state = {
+        username: ''
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(
+            this.state.username
+        )
+    }
+
     render() {
         return (
-            <form action="">
-                <input type="text" placeholder="Github username"/>
+            <form onSubmit={this.handleSubmit}>
+                <input type="text" placeholder="Github username"
+                       value={this.state.username}
+                       onChange={event => this.setState({username: event.target.value})}
+                       required/>
                 <button>Add Card</button>
             </form>
         )
@@ -70,37 +85,3 @@ class App extends React.Component {
 
 export default App;
 
-//
-// {
-//     "login": "ahmedEid1",
-//     "id": 53142237,
-//     "node_id": "MDQ6VXNlcjUzMTQyMjM3",
-//
-//     "gravatar_id": "",
-//     "url": "https://api.github.com/users/ahmedEid1",
-//     "html_url": "https://github.com/ahmedEid1",
-//     "followers_url": "https://api.github.com/users/ahmedEid1/followers",
-//     "following_url": "https://api.github.com/users/ahmedEid1/following{/other_user}",
-//     "gists_url": "https://api.github.com/users/ahmedEid1/gists{/gist_id}",
-//     "starred_url": "https://api.github.com/users/ahmedEid1/starred{/owner}{/repo}",
-//     "subscriptions_url": "https://api.github.com/users/ahmedEid1/subscriptions",
-//     "organizations_url": "https://api.github.com/users/ahmedEid1/orgs",
-//     "repos_url": "https://api.github.com/users/ahmedEid1/repos",
-//     "events_url": "https://api.github.com/users/ahmedEid1/events{/privacy}",
-//     "received_events_url": "https://api.github.com/users/ahmedEid1/received_events",
-//     "type": "User",
-//     "site_admin": false,
-//
-//     "blog": "",
-//     "location": null,
-//     "email": null,
-//     "hireable": null,
-//     "bio": null,
-//     "twitter_username": null,
-//     "public_repos": 24,
-//     "public_gists": 0,
-//     "followers": 0,
-//     "following": 1,
-//     "created_at": "2019-07-21T11:12:35Z",
-//     "updated_at": "2020-09-28T17:01:04Z"
-// }
